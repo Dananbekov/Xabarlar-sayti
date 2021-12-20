@@ -1,0 +1,32 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Django blog</title>
+	<link rel="stylesheet" type="text/css" href="{% static 'css/base.css' %}">
+</head>
+<body>
+<header>
+	<div class="nav-left">
+	<h1><a href="{% url 'home' %}">Django blogi</a></h1>
+	</div>
+	<div class="nav-right">
+	<h1><a href="{% url 'post_new' %}">Yangi blog yaratish</a></h1>
+	</div>
+</header>
+{% if user.is_authenticated %}
+<p>{{ user.username }}, Saytga xush kelibsiz</p>
+<p><a href="{% url 'logout' %}">Log Out</a></p>
+{% else %}
+<p>Siz saytdan ro'yxatdan o'tmagansiz</p>
+<a href="{% url 'login' %}">Log In</a> | <a href="{% url 'signup' %}">Ro'yxatdan o'tish</a>
+{% endif %}
+<div>
+	{% block content %}
+
+	{% endblock content %}
+</div>
+
+</body>
+</html>
